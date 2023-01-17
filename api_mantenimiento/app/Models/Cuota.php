@@ -9,5 +9,15 @@ class Cuota extends Model
 {
     use HasFactory;
     protected $table = "cuota";
+    protected $primaryKey = 'id_cuota';
+    public $timestamps = false;
     protected $fillable = ['id_cuota', 'concepto', 'fecha_emision', 'importe','notas','cliente_id'];
+
+    public function obtenerCuotas(){
+        return Cuota::all();
+    }
+
+    public function obtenerCuotaPorId($id_cuota){
+        return Cuota::find($id_cuota);
+    }    
 }

@@ -10,5 +10,15 @@ class Incidencia extends Model
     use HasFactory;
     
     protected $table = "incidencia";
+    public $timestamps = false;
+    protected $primaryKey = 'id_incidencia';
     protected $fillable = ['id_incidencia', 'nif_cif', 'nombre_contacto', 'apellido_contacto','telefono_contacto','descripcion','email_contacto','direccion','poblacion','estado','fecha_creacion','id_empleado_asignado','anotacion_anterior','anotacion_posterior','id_empleado'];
+
+    public function obtenerIncidencias(){
+        return Incidencia::all();
+    }
+
+    public function obtenerIncidenciaPorId($id_incidencia){
+        return Incidencia::find($id_incidencia);
+    }
 }
