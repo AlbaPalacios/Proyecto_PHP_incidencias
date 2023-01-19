@@ -21,4 +21,16 @@ class Empleado extends Model
     public function obtenerEmpleadoPorId($id_empleado){
         return Empleado::find($id_empleado);
     }
+
+    public function incidenciasCreadas(){
+        return $this->hasMany('App\Models\Incidencia', 'id_empleado', 'id_empleado');
+    }
+
+    public function incidenciasAsignadas(){
+        return $this->hasMany('App\Models\Incidencia', 'id_empleado_asignado', 'id_empleado');
+    }
+    
+    public function clientesRegistrados(){
+        return $this->hasMany('App\Models\Cliente', 'id_empleado_creador', 'id_empleado');
+    }
 }
