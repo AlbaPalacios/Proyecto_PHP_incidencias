@@ -14,11 +14,11 @@ class Cliente extends Model
     protected $fillable = ['id_cliente', 'dni', 'nombre', 'telefono','correo','numero_cuenta','pais','moneda','importe_cuota_mensual'];
 
     public function incidenciasRegistradas() {
-        return $this->hasMany('App\Models\Incidencia', 'id_cliente', 'id_cliente');
+        return $this->hasMany(App\Models\Incidencia::class, 'id_cliente', 'id_cliente');
     }
 
     public function cuotas() {
-        return $this->hasMany('App\Models\Cuota', 'cliente_id', 'id_cliente');
+        return $this->hasMany(App\Models\Cuota::class, 'cliente_id', 'id_cliente');
     }
 
     public function obtenerClientes(){
