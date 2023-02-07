@@ -11,7 +11,9 @@
 <div class="container">
   <h1>Lista de tareas</h1>
   <div class="container">
-    {% if isAdmin == true %}
+    @if ($isAdmin =='true')
+        <td>Esperando</td>
+  
     <button
       type="button"
       class="btn btn-primary"
@@ -19,7 +21,7 @@
     >
       Crear tarea
     </button>
-    {% endif %}
+    @endif
     
   </div>
   <table class="table">
@@ -35,51 +37,54 @@
       </tr>
     </thead>
     <tbody>
-      {% for tarea in tareas %}
+      @foreach ($incidencias as $incidencia)
       <tr>
-        <th scope="row">{{tarea["nif_cif"]}}</th>
-        <td>{{tarea["nombre_contacto"]}}</td>
-        <td>{{tarea["descripcion"]}}</td>
-        {% if tarea['estado'] == 'B' > 10 %}
+        <th scope="row">{{$incidencia->nif_cif}}</th>
+        <td>{{$incidencia->nombre_contacto}}</td>
+        <td>{{$incidencia->descripcion}}</td>
+        @if ($incidencia->estado=='B')
         <td>Esperando</td>
-        {% elseif tarea['estado'] == 'P' > 0 %}
+        @elseif ($incidencia->estado=='P')
         <td>Pendiente</td>
-        {% elseif tarea['estado'] == 'R' > 0 %}
+        @elseif ($incidencia->estado=='R')
         <td>Realizada</td>
-        {% elseif tarea['estado'] == 'C' > 0 %}
+        @elseif ($incidencia->estado=='C')
         <td>Cancelada</td>
-        {% else %}
+        @else
         <td>No Válido</td>
-        {% endif %}
-        <td>{{tarea["fecha_realizacion"]}}</td>
-        <td>{{tarea["id_operario"]}}</td>
+        @endif
+
+        <td>{{$incidencia->fecha_realizacion}}</td>
+        <td>{{$incidencia->id_operario}}</td>
         <td>
-          {% if isAdmin == true %}
+          @if ($isAdmin=='true')
+         
           <a
             type="button"
-            href="/editarTarea/{{tarea['idtarea']}}"
+            href="/editarTarea/{{$incidencia->id_incidencia}}"
             class="btn btn-info"
-            >Editar</a
-          >{{' '}} {% endif %}
+            >Editar
+            </a
+          >{{' '}} @endif
 
           <a
             type="button"
-            href="/mostrarTarea/{{tarea['idtarea']}}"
+            href="/mostrarTarea/{{$incidencia->id_incidencia}}"
             class="btn btn-warning"
             >Mostrar</a
           >{{' '}} 
-          {% if isAdmin == true %}
-          <form action="/borrarTarea/{{tarea['idtarea']}}" method="POST">
+          @if ($isAdmin=='true')
+          <form action="/borrarTarea/{{$incidencia->id_incidencia}}" method="POST">
             <button
             type="submit"
-            href="/borrarTarea/{{tarea['idtarea']}}"
+            href="/borrarTarea/{{$incidencia->id_incidencia}}"
             class="btn btn-danger"
             >Borrar</button>
           </form>
-          {% endif %}
+          @endif
         </td>
       </tr>
-      {% endfor %}
+      @endforeach
     </tbody>
   </table>
 </div>

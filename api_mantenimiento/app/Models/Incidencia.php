@@ -17,8 +17,4 @@ class Incidencia extends Model
     public function obtenerIncidencias(){
         return Incidencia::all();
     }
-
-    public function obtenerIncidenciaPorId($id_incidencia){
-        return Incidencia::find($id_incidencia);
-    }
 }

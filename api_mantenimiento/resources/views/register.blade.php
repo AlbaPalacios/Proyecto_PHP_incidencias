@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %}
+@extends('layout')
+@section('content')
 <style>
   .login-form {
     width: 340px;
@@ -62,4 +63,4 @@
       </div>
 </div>
 
-{% endblock %}
+@endsection
