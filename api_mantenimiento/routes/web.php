@@ -21,7 +21,8 @@ Route::get('/', function () {
 Route::group(['prefix' => 'incidencias'], function() {
     Route::get('/registrar', [IncidenciaController::class, 'mostrarFormularioRegistrarIncidencia'])->name('incidencias.registrar.get');
     Route::post('/registrar', [IncidenciaController::class, 'registrarIncidencia'])->name('incidencias.registrar.post');
-    Route::post('/editar/{id_incidencia}', [IncidenciaController::class, 'editarIncidencia'])->name('incidencias.editar');
+    Route::get('/editar/{id_incidencia}', [IncidenciaController::class, 'mostrarFormularioEditarIncidencia'])->name('incidencias.editar.get');
+    Route::post('/editar/{id_incidencia}', [IncidenciaController::class, 'editarIncidencia'])->name('incidencias.editar.post');
     Route::get('/{id_cliente}', [IncidenciaController::class, 'mostrarIncidenciasCliente'])->name('incidencias.mostrar.cliente');
     Route::post('/asignarIncidencia/{id_empleado}', 'IncidenciaController@asignarIncidencia')->name('incidencias.asignarIncidencia');
 

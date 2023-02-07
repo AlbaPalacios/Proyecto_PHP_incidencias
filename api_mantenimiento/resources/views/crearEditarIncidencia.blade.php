@@ -7,7 +7,7 @@
     <h1> @if (isset($id_incidencia) == false) {{'Crear'}} @else {{'Editar'}} @endif incidencia</h1>
 
     <!-- Formulario -->
-    <form method="POST" action="@if (isset($id_incidencia) == false) {{route('incidencias.registrar.get')}} @else {{route('incidencias.editar', ['id_incidencia' => $id_incidencia])}} @endif">
+    <form method="POST" action="@if (isset($id_incidencia) == false) {{route('incidencias.registrar.get')}} @else {{route('incidencias.editar.get', ['id_incidencia' => $id_incidencia])}} @endif">
         @csrf <!-- {{ csrf_field() }} -->
 
         <!-- DNI/CIF -->
@@ -23,9 +23,20 @@
 
         <!-- Nombre contacto -->
         <div class="mb-3">
-            <label class="form-label" for="nombre_contacto">Persona de contacto</label>
-            <input type="text" value="@if (isset($incidencia->nombre_contacto) == false) {{old('nombre_contacto')}} @else {{$incidencia->nombre_contacto}} @endif"
-                class="form-contro"
+            <label class="form-label" for="apellido_contacto">Nombre de contacto</label>
+            <input type="text" value="@if (isset($incidencia->nombre_contacto) == false) {{old('nombre_contacto')}} @else {{$incidencia->apellido_contacto}} @endif"
+                class="form-control"
+                name="apellido_contacto" id="apellido_contacto" placeholder="Persona de contacto">
+                <div class="text-danger">
+                    {{$errors->first('apellido_contacto')}}
+                </div>
+        </div>
+
+        <!-- Apellido contacto -->
+        <div class="mb-3">
+            <label class="form-label" for="apellido_contacto">Apellidos del contacto</label>
+            <input type="text" value="@if (isset($incidencia->apellido_contacto) == false) {{old('apellido_contacto')}} @else {{$incidencia->nombre_contacto}} @endif"
+                class="form-control"
                 name="nombre_contacto" id="nombre_contacto" placeholder="Persona de contacto">
                 <div class="text-danger">
                     {{$errors->first('nombre_contacto')}}
