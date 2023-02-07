@@ -18,6 +18,15 @@ class IncidenciaController extends Controller
         return view('crearEditarIncidencia',[]);
     }
     public function registrarIncidencia(Request $request){
+        $request->validate([
+            'nombre_contacto' => 'required',
+            'apellido_contacto' => 'required',
+            'descripcion' => 'required',
+            'nif_cif' => 'required',
+            'telefono_contacto' => 'required|regex:/(01)[0-9]{9}/',
+            'cp' => 'required|max:5',
+            'email_contacto' => 'required|email',
+        ]);
         $incidencia = new Incidencia();
         $incidencia->nif_cif = $request->nif_cif;
         $incidencia->nombre_contacto = $request->nombre_contacto;
