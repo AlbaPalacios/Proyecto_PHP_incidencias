@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class CuotaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function añadirCuota(Request $request){
 
     }

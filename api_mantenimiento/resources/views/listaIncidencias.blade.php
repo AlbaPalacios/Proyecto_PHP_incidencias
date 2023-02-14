@@ -2,13 +2,6 @@
 
 @section('content')
 <div class="container">
-  <div class="mb-12">
-    <form action="/logout" method="post">
-      <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-  </div>
-</div>
-<div class="container">
   <h1>Lista de tareas</h1>
   <div class="container">
     @if ($isAdmin =='true')
