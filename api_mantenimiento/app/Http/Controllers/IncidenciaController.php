@@ -9,6 +9,11 @@ use function Ramsey\Uuid\v1;
 
 class IncidenciaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function mostrarIncidenciasCliente(Request $request, $id_cliente){
         $incidencias=Incidencia::where('id_cliente', $id_cliente)->get();
         $isAdmin = false; 
