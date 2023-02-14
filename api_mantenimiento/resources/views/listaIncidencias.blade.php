@@ -62,24 +62,20 @@
           <a
             type="button"
             href="/editarTarea/{{$incidencia->id_incidencia}}"
-            class="btn btn-info"
-            >Editar
-            </a
-          >{{' '}} @endif
+            class="btn btn-info">Editar
+            </a>{{' '}} @endif
 
           <a
             type="button"
             href="/mostrarTarea/{{$incidencia->id_incidencia}}"
-            class="btn btn-warning"
-            >Mostrar</a
+            class="btn btn-warning">Mostrar</a
           >{{' '}} 
           @if ($isAdmin=='true')
           <form action="/borrarTarea/{{$incidencia->id_incidencia}}" method="POST">
             <button
             type="submit"
             href="/borrarTarea/{{$incidencia->id_incidencia}}"
-            class="btn btn-danger"
-            >Borrar</button>
+            class="btn btn-danger">Borrar</button>
           </form>
           @endif
         </td>

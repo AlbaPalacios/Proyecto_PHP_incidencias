@@ -47,3 +47,6 @@ Route::group(['prefix' => 'cuotas'], function() {
     Route::get('/listadoCuotas/{id_cliente}', 'CuotaController@listadoCuotas')->name('cuotas.listado');
     Route::put('/modificarCuota/{id_cuota}', 'CuotaController@modificarCuota')->name('cuotas.modificar');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

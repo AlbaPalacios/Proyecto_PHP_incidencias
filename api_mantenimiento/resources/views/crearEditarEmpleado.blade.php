@@ -93,10 +93,6 @@
            
         </div>
 
-   
-
-      
-
         {{-- <div class="mb-3">
             <label class="form-label" for="id_operario">Operario encargado</label>
             <select id="id_operario" name="id_operario" class="custom-select custom-select-lg mb-3">

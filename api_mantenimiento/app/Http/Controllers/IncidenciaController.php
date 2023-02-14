@@ -23,7 +23,7 @@ class IncidenciaController extends Controller
             'apellido_contacto' => 'required',
             'descripcion' => 'required',
             'nif_cif' => 'required',
-            'telefono_contacto' => 'required|regex:/(01)[0-9]{9}/',
+            'telefono_contacto' => 'required|regex:/[0-9]{9}/',
             'cp' => 'required|max:5',
             'email_contacto' => 'required|email',
         ]);

@@ -17,7 +17,7 @@ class EmpleadoController extends Controller
 
     }
     public function cambioTipoEmpleado(Request $request){
-
+        
     }
 
 
