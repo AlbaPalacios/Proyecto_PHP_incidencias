@@ -12,8 +12,9 @@ class IncidenciaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
     }
-    
+
     public function mostrarIncidenciasCliente(Request $request, $id_cliente){
         $incidencias=Incidencia::where('id_cliente', $id_cliente)->get();
         $isAdmin = false; 
