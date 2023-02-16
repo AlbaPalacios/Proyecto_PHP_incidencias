@@ -17,7 +17,7 @@ use App\Http\Controllers\EmpleadoController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
 
 Route::group(['prefix' => 'incidencias'], function() {
     Route::get('/registrar', [IncidenciaController::class, 'mostrarFormularioRegistrarIncidencia'])->name('incidencias.registrar.get');
@@ -31,10 +31,11 @@ Route::group(['prefix' => 'incidencias'], function() {
 
 Route::group(['prefix' => 'empleados'], function() {
  
-    Route::get('/altaEmpleado',[EmpleadoController::class, 'mostrarRegistrarEmpleado'])->name('empleados.registrar.get');
-    Route::post('/altaEmpleado',[EmpleadoController::class, 'registrarEmpleado'])->name('empleados.registrar.post');
-    Route::get('/modificarEmpleado',[EmpleadoController::class, 'mostrarModificarEmpleado'])->name('empleados.modificar');
-    Route::post('/modificarEmpleado',[EmpleadoController::class, 'modificarEmpleado'])->name('empleados.modificar');
+    Route::get('/crear',[EmpleadoController::class, 'mostrarRegistrarEmpleado'])->name('empleados.registrar.get');
+    Route::post('/crear',[EmpleadoController::class, 'registrarEmpleado'])->name('empleados.registrar.post');
+    Route::get('/editar/{id_empleado}',[EmpleadoController::class, 'mostrarModificarEmpleado'])->name('empleados.editar.get');
+    Route::post('/editar/{id_empleado}',[EmpleadoController::class, 'modificarEmpleado'])->name('empleados.editar.post');
+    Route::get('/',[EmpleadoController::class, 'mostrarListaEmpleados'])->name('empleados');
 
     Route::delete('/bajaEmpleado/{id_empleado}', 'EmpleadoController@eliminarEmpleado')->name('empleados.eliminar');
     Route::put('/cambioTipoEmpleado/{id_empleado}', 'EmpleadoController@cambioTipoEmpleado')->name('empleados.cambio');
@@ -46,10 +47,18 @@ Route::group(['prefix' => 'cuotas'], function() {
     Route::delete('/borrarCuota/{id_cuota}', 'CuotaController@borrarCuota')->name('cuotas.borrar');
     Route::get('/listadoCuotas/{id_cliente}', 'CuotaController@listadoCuotas')->name('cuotas.listado');
     Route::put('/modificarCuota/{id_cuota}', 'CuotaController@modificarCuota')->name('cuotas.modificar');
+    Route::post('/', 'CuotaController@añadirCuota')->name('cuotas');
 });
 
-Route::group(['prefix' => 'cliente'], function() {
-    Route::get('/crear', [App\Http\Controllers\AdminController::class, 'mostrarFormularioCrearCliente'])->name('admin.cliente.crear');
+Route::group(['prefix' => 'clientes'], function() {
+    Route::get('/crear', [App\Http\Controllers\AdminController::class, 'mostrarFormularioCrearCliente'])->name('admin.cliente.crear.get');
+    Route::get('/', 'CuotaController@listadoCuotas')->name('clientes');
+
+});
+
+Route::group(['prefix' => 'facturas'], function() {
+    Route::get('/', 'CuotaController@listadoCuotas')->name('clientes');
+
 });
 
 Auth::routes();

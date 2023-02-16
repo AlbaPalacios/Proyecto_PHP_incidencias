@@ -7,7 +7,7 @@
     <h1> @if (isset($id_incidencia) == false) {{'Crear'}} @else {{'Editar'}} @endif incidencia</h1>
 
     <!-- Formulario -->
-    <form method="POST" action="@if (isset($id_incidencia) == false) {{route('incidencias.registrar.get')}} @else {{route('incidencias.editar.get', ['id_incidencia' => $id_incidencia])}} @endif">
+    <form method="POST" action="@if (isset($id_incidencia) == false) {{route('incidencias.registrar.post')}} @else {{route('incidencias.editar.post', ['id_incidencia' => $id_incidencia])}} @endif">
         @csrf <!-- {{ csrf_field() }} -->
 
         <!-- DNI/CIF -->

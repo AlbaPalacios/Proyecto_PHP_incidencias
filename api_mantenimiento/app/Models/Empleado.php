@@ -27,6 +27,11 @@ class Empleado extends Model
         return $this->hasMany(App\Models\Cliente::class, 'id_empleado_creador', 'id_empleado');
     }
 
+    //Enlaza empleado con la tabla User de laravel
+    public function usuarioEmpleado() {
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
+
     public function obtenerEmpleados(){
         return Empleado::all();
     }
