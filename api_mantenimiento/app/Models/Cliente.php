@@ -33,6 +33,9 @@ class Cliente extends Model
         $this->incidenciasRegistradas()->save($incidencia);
     }
 
-    
+    //Enlaza cliente con la tabla User de laravel
+    public function usuarioCliente() {
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
    
 }

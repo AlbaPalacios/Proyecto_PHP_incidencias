@@ -69,10 +69,5 @@ class EmpleadoController extends Controller
         $empleado->save();
         return redirect()->route('empleados');
     }
-    public function cambioTipoEmpleado(Request $request){
-        
-    }
-
-
 
 }

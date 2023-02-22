@@ -27,17 +27,17 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
 
-                @if (Auth::user()->isAdmin)
+                @if (Auth::user() !== null && Auth::user()->isAdmin)
                 <a class="navbar-brand" href="{{ url('/empleados') }}">
                     {{ __('Empleados') }}
                 </a>
                 @endif
-                @if (Auth::user()->isAdmin)
+                @if (Auth::user() !== null && Auth::user()->isAdmin)
                 <a class="navbar-brand" href="{{ url('/clientes') }}">
                     {{ __('Clientes') }}
                 </a>
                 @endif
-                @if (Auth::user()->isAdmin)
+                @if (Auth::user() !== null && Auth::user()->isAdmin)
                 <a class="navbar-brand" href="{{ url('/cuotas') }}">
                     {{ __('Cuotas') }}
                 </a>

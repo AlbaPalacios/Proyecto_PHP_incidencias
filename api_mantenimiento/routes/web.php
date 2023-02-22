@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\IncidenciaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
@@ -36,10 +37,16 @@ Route::group(['prefix' => 'empleados'], function() {
     Route::get('/editar/{id_empleado}',[EmpleadoController::class, 'mostrarModificarEmpleado'])->name('empleados.editar.get');
     Route::post('/editar/{id_empleado}',[EmpleadoController::class, 'modificarEmpleado'])->name('empleados.editar.post');
     Route::get('/',[EmpleadoController::class, 'mostrarListaEmpleados'])->name('empleados');
-
     Route::delete('/bajaEmpleado/{id_empleado}', 'EmpleadoController@eliminarEmpleado')->name('empleados.eliminar');
     Route::put('/cambioTipoEmpleado/{id_empleado}', 'EmpleadoController@cambioTipoEmpleado')->name('empleados.cambio');
-    
+});
+
+Route::group(['prefix' => 'clientes'], function() {
+    Route::get('/crear',[ClienteController::class, 'mostrarRegistrarCliente'])->name('clientes.registrar.get');
+    Route::post('/crear',[ClienteController::class, 'registrarCliente'])->name('clientes.registrar.post');
+    Route::get('/editar/{id_cliente}',[ClienteController::class, 'mostrarModificarCliente'])->name('clientes.editar.get');
+    Route::post('/editar/{id_cliente}',[ClienteController::class, 'modificarCliente'])->name('clientes.editar.post');
+    Route::get('/',[ClienteController::class, 'mostrarListaClientes'])->name('clientes');
 });
 
 Route::group(['prefix' => 'cuotas'], function() {
@@ -50,15 +57,8 @@ Route::group(['prefix' => 'cuotas'], function() {
     Route::post('/', 'CuotaController@añadirCuota')->name('cuotas');
 });
 
-Route::group(['prefix' => 'clientes'], function() {
-    Route::get('/crear', [App\Http\Controllers\AdminController::class, 'mostrarFormularioCrearCliente'])->name('admin.cliente.crear.get');
-    Route::get('/', 'CuotaController@listadoCuotas')->name('clientes');
-
-});
-
 Route::group(['prefix' => 'facturas'], function() {
-    Route::get('/', 'CuotaController@listadoCuotas')->name('clientes');
-
+    Route::get('/', 'CuotaController@listadoCuotas')->name('facturas');
 });
 
 Auth::routes();
