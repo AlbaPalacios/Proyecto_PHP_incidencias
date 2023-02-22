@@ -52,6 +52,10 @@
             type="button"
             href="{{route('cuotas.editar.get', ['id_cuota' => $cuota->id_cuota])}}"
             class="btn btn-info">Editar
+            </a>{{' '}}<a
+            type="button"
+            href="{{route('cuotas.pdf', ['id_cuota' => $cuota->id_cuota])}}"
+            class="btn btn-info">PDF
             </a></td>
       </tr>
       @endforeach

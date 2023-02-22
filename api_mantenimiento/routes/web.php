@@ -5,6 +5,7 @@ use App\Http\Controllers\CuotaController;
 use App\Http\Controllers\IncidenciaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,7 @@ Route::group(['prefix' => 'cuotas'], function() {
     Route::post('/editar/{id_cuota}',[CuotaController::class, 'modificarCuota'])->name('cuotas.editar.post');
     Route::get('/remesaMensual',[CuotaController::class, 'mostrarRemesaMensual'])->name('cuotas.remesa.crearRemesaMensual.get');
     Route::post('/remesaMensual',[CuotaController::class, 'crearRemesaMensual'])->name('cuotas.remesa.crearRemesaMensual.post');
+    Route::get('/pdf/{id_cuota}',[PDFController::class, 'crearPDFCuota'])->name('cuotas.pdf');
     Route::get('/',[CuotaController::class, 'mostrarListaCuotas'])->name('cuotas');
 });
 
