@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
+use App\Models\Cuota;
 use Illuminate\Http\Request;
 
 class CuotaController extends Controller
@@ -11,17 +13,64 @@ class CuotaController extends Controller
         $this->middleware('auth');
     }
     
-    public function añadirCuota(Request $request){
-
+    public function mostrarListaCuotas(Request $request){
+        $cuotas = Cuota::all();
+        return view('cuotas.listaCuotas',["cuotas" => $cuotas]);
     }
-    public function borrarCuota(Request $request){
-
+    
+    public function mostrarRegistrarCuota(Request $request){
+        $clientes = Cliente::all();
+        return view('crearEditarCuota',["clientes" => $clientes]);
     }
-    public function listadoCuotas(Request $request){
+    public function registrarCuota(Request $request){
+        $request->validate([
+            'concepto' => 'required',
+            'importe' => 'required',
+            'notas' => 'required',
+            'cliente_id' => 'required',
+        ]);
 
+        $cuota = new Cuota();
+        $cuota->fill($request->all());
+        $cuota->save();
+        return redirect()->route('cuotas');
     }
-    public function modificarCuota(Request $request){
 
+    public function mostrarModificarCuota(Request $request, $id_cuota){
+        $cuota = Cuota::find($id_cuota);
+        return view('crearEditarCuota',["cuota" => $cuota]);
+    }
+
+    public function modificarCuota(Request $request, $id_cuota){
+        $request->validate([
+            'concepto' => 'required',
+            'importe' => 'required',
+            'notas' => 'required',
+        ]);
+        $cuota = Cuota::find($id_cuota);
+        $cuota->fill($request->all());
+        $cuota->save();
+        return redirect()->route('cuotas');
+    }
+
+    public function mostrarRemesaMensual(Request $request){
+        return view('crearEditarCuota',[]);
+    }
+
+    public function crearRemesaMensual(Request $request){
+        $request->validate([
+            'concepto' => 'required',
+            'importe' => 'required',
+            'notas' => 'required',
+        ]);
+        $clientes = Cliente::all();
+        foreach ($clientes as $cliente) {
+            $cuota = new Cuota();
+            $cuota->fill($request->all());
+            $cuota->cliente_id = $cliente->id_cliente;
+            $cuota->save();
+        }
+        return redirect()->route('cuotas');
     }
     
 }

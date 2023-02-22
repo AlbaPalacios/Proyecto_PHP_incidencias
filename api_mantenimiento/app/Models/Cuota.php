@@ -20,4 +20,9 @@ class Cuota extends Model
     public function obtenerCuotaPorId($id_cuota){
         return Cuota::find($id_cuota);
     }    
+
+    //Enlaza empleado con la tabla User de laravel
+    public function clienteCuota() {
+        return $this->belongsTo(Cliente::class, 'cliente_id', 'id_cliente');
+    }
 }

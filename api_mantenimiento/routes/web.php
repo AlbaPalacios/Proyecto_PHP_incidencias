@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CuotaController;
 use App\Http\Controllers\IncidenciaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
@@ -50,11 +51,13 @@ Route::group(['prefix' => 'clientes'], function() {
 });
 
 Route::group(['prefix' => 'cuotas'], function() {
-    Route::post('/añadirCuota/{id_cliente}', 'CuotaController@añadirCuota')->name('cuotas.añadir');
-    Route::delete('/borrarCuota/{id_cuota}', 'CuotaController@borrarCuota')->name('cuotas.borrar');
-    Route::get('/listadoCuotas/{id_cliente}', 'CuotaController@listadoCuotas')->name('cuotas.listado');
-    Route::put('/modificarCuota/{id_cuota}', 'CuotaController@modificarCuota')->name('cuotas.modificar');
-    Route::post('/', 'CuotaController@añadirCuota')->name('cuotas');
+    Route::get('/crear',[CuotaController::class, 'mostrarRegistrarCuota'])->name('cuotas.registrar.get');
+    Route::post('/crear',[CuotaController::class, 'registrarCuota'])->name('cuotas.registrar.post');
+    Route::get('/editar/{id_cuota}',[CuotaController::class, 'mostrarModificarCuota'])->name('cuotas.editar.get');
+    Route::post('/editar/{id_cuota}',[CuotaController::class, 'modificarCuota'])->name('cuotas.editar.post');
+    Route::get('/remesaMensual',[CuotaController::class, 'mostrarRemesaMensual'])->name('cuotas.remesa.crearRemesaMensual.get');
+    Route::post('/remesaMensual',[CuotaController::class, 'crearRemesaMensual'])->name('cuotas.remesa.crearRemesaMensual.post');
+    Route::get('/',[CuotaController::class, 'mostrarListaCuotas'])->name('cuotas');
 });
 
 Route::group(['prefix' => 'facturas'], function() {
