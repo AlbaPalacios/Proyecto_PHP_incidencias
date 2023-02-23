@@ -4,10 +4,10 @@
 
 <div class="container">
 
-    <h1> @if (isset($id_incidencia) == false) {{'Crear'}} @else {{'Editar'}} @endif incidencia</h1>
+    <h1> @if (isset($incidencia) == false) {{'Crear'}} @else {{'Editar'}} @endif incidencia</h1>
 
     <!-- Formulario -->
-    <form method="POST" action="@if (isset($id_incidencia) == false) {{route('incidencias.registrar.post')}} @else {{route('incidencias.editar.post', ['id_incidencia' => $id_incidencia])}} @endif">
+    <form method="POST" action="@if (isset($incidencia) == false) {{route('incidencias.registrar.post')}} @else {{route('incidencias.editar.post', ['id_incidencia' => $incidencia->id_incidencia])}} @endif">
         @csrf <!-- {{ csrf_field() }} -->
 
         <!-- DNI/CIF -->
@@ -23,12 +23,12 @@
 
         <!-- Nombre contacto -->
         <div class="mb-3">
-            <label class="form-label" for="apellido_contacto">Nombre de contacto</label>
-            <input type="text" value="@if (isset($incidencia->nombre_contacto) == false) {{old('nombre_contacto')}} @else {{$incidencia->apellido_contacto}} @endif"
+            <label class="form-label" for="nombre_contacto">Nombre de contacto</label>
+            <input type="text" value="@if (isset($incidencia->nombre_contacto) == false) {{old('nombre_contacto')}} @else {{$incidencia->nombre_contacto}} @endif"
                 class="form-control"
-                name="apellido_contacto" id="apellido_contacto" placeholder="Persona de contacto">
+                name="nombre_contacto" id="nombre_contacto" placeholder="Persona de contacto">
                 <div class="text-danger">
-                    {{$errors->first('apellido_contacto')}}
+                    {{$errors->first('nombre_contacto')}}
                 </div>
         </div>
 
@@ -37,9 +37,9 @@
             <label class="form-label" for="apellido_contacto">Apellidos del contacto</label>
             <input type="text" value="@if (isset($incidencia->apellido_contacto) == false) {{old('apellido_contacto')}} @else {{$incidencia->nombre_contacto}} @endif"
                 class="form-control"
-                name="nombre_contacto" id="nombre_contacto" placeholder="Persona de contacto">
+                name="apellido_contacto" id="apellido_contacto" placeholder="Persona de contacto">
                 <div class="text-danger">
-                    {{$errors->first('nombre_contacto')}}
+                    {{$errors->first('apellido_contacto')}}
                 </div>
         </div>
 
@@ -93,9 +93,7 @@
         <!-- Codigo postal -->
         <div class="mb-3">
             <label class="form-label" for="cp">Codigo postal</label>
-            <input type="text" value="@if (isset($incidencia->cp) == false) {{old('cp')}} @else {{$incidencia->cp}} @endif"
-            
-                class="form-control" name="cp" id="cp"
+            <input type="text" value="@if (isset($incidencia->cp) == false) {{old('cp')}} @else {{$incidencia->cp}} @endif" class="form-control" name="cp" id="cp"
                 placeholder="Codigo postal">
                 <div class="text-danger">
                     {{$errors->first('cp')}}
@@ -119,15 +117,17 @@
                 <option @if (isset($incidencia->nif_cif) == true && $incidencia->estado == 'C') {{'selected'}} @endif value="C">Cancelada</option>
               </select>
         </div>
-        {{-- <div class="mb-3">
-            <label class="form-label" for="id_operario">Operario encargado</label>
-            <select id="id_operario" name="id_operario" class="custom-select custom-select-lg mb-3">
-                @foreach ($operario as $operarios)
+
+        <!-- Empleado asignado -->
+        <div class="mb-3">
+            <label class="form-label" for="id_empleado_asignado">Empleado encargado</label>
+            <select id="id_empleado_asignado" name="id_empleado_asignado" class="custom-select custom-select-lg mb-3">
+                @foreach ($empleados as $empleado)
                 
-                <option @if ($tarea->estado == operario->id_usuario) selected  @endif value="{{operario->id_usuario}}">{{operario->nombre}}</option>
+                <option @if (isset($incidencia) && $incidencia->id_empleado_asignado == $empleado->id_empleado) selected  @endif value="{{$empleado->id_empleado}}">{{$empleado->nombre}}</option>
                 @endforeach
               </select>
-        </div> --}}
+        </div>
 
         <!-- Fecha realizacion -->
         <div class="mb-3">
@@ -150,8 +150,8 @@
                 name="anotacion_posterior" id="anotacion_posterior" placeholder="Anotaciones posteriores">
         </div>
 
-        <a type="button" href="/" class="btn btn-primary">Atras</a>
-        <button type="submit" class="btn btn-primary">@if (isset($id_incidencia) == false) {{'Crear'}}  @else {{'Editar'}} @endif tarea</button>
+        <a type="button" href="/incidencias" class="btn btn-primary">Atras</a>
+        <button type="submit" class="btn btn-primary">@if (isset($incidencia) == false) {{'Crear'}}  @else {{'Editar'}} @endif incidencia</button>
     </form>
 </div>
 

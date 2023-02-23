@@ -28,6 +28,11 @@
                 </a>
 
                 @if (Auth::user() !== null && Auth::user()->isAdmin)
+                <a class="navbar-brand" href="{{ url('/incidencias') }}">
+                    {{ __('Incidencias') }}
+                </a>
+                @endif
+                @if (Auth::user() !== null && Auth::user()->isAdmin)
                 <a class="navbar-brand" href="{{ url('/empleados') }}">
                     {{ __('Empleados') }}
                 </a>

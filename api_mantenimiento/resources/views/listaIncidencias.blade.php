@@ -4,15 +4,13 @@
 <div class="container">
   <h1>Lista de tareas</h1>
   <div class="container">
-    @if ($isAdmin =='true')
-        <td>Esperando</td>
-  
+    @if (Auth::user()->isAdmin == '1')  
     <button
       type="button"
       class="btn btn-primary"
-      onclick="window.location.href='/crearTarea'"
+      onclick="window.location.href='/incidencias/registrar'"
     >
-      Crear tarea
+      Crear incidencia
     </button>
     @endif
     
@@ -50,11 +48,11 @@
         <td>{{$incidencia->fecha_realizacion}}</td>
         <td>{{$incidencia->id_operario}}</td>
         <td>
-          @if ($isAdmin=='true')
+          @if (Auth::user()->isAdmin == '1')
          
           <a
             type="button"
-            href="/editarTarea/{{$incidencia->id_incidencia}}"
+            href="/incidencias/editar/{{$incidencia->id_incidencia}}"
             class="btn btn-info">Editar
             </a>{{' '}} @endif
 
@@ -63,7 +61,7 @@
             href="/mostrarTarea/{{$incidencia->id_incidencia}}"
             class="btn btn-warning">Mostrar</a
           >{{' '}} 
-          @if ($isAdmin=='true')
+          @if (Auth::user()->isAdmin == '1')
           <form action="/borrarTarea/{{$incidencia->id_incidencia}}" method="POST">
             <button
             type="submit"

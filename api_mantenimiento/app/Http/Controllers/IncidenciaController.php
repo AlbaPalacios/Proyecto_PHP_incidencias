@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empleado;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use function Ramsey\Uuid\v1;
 
@@ -12,16 +14,21 @@ class IncidenciaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin');
     }
 
-    public function mostrarIncidenciasCliente(Request $request, $id_cliente){
-        $incidencias=Incidencia::where('id_cliente', $id_cliente)->get();
-        $isAdmin = false; 
-        return view('listaIncidencias',compact('incidencias', 'isAdmin'));
+    public function mostrarIncidencias(Request $request){
+        if(Auth::user()->isAdmin == '1') {
+            $incidencias=Incidencia::all();
+        }
+        else {
+            $empleado = Empleado::where('id_user', Auth::user()->id)->first();
+            $incidencias=Incidencia::where('id_empleado_asignado', $empleado->id_empleado)->get();
+        }
+        return view('listaIncidencias',['incidencias' => $incidencias]);
     }
     public function mostrarFormularioRegistrarIncidencia(Request $request){
-        return view('crearEditarIncidencia',[]);
+        $empleados = Empleado::all();
+        return view('crearEditarIncidencia',['empleados' => $empleados]);
     }
     public function registrarIncidencia(Request $request){
         $request->validate([
@@ -34,16 +41,16 @@ class IncidenciaController extends Controller
             'email_contacto' => 'required|email',
         ]);
         $incidencia = new Incidencia();
+        //Metodo fill rellena el objeto incidencia
         $incidencia->fill($request->all());
         $incidencia->save();
-        $incidencias=Incidencia::where('id_cliente', 1)->get();
-        $isAdmin = false; 
-        return view('listaIncidencias',compact('incidencias', 'isAdmin'));
+        return redirect()->route('incidencias');
     }
 
     public function mostrarFormularioEditarIncidencia(Request $request, $id_incidencia){
         $incidencia = Incidencia::find($id_incidencia);
-        return view('crearEditarIncidencia',["incidencia" => $incidencia, "id_incidencia" => $id_incidencia]);
+        $empleados = Empleado::all();
+        return view('crearEditarIncidencia',["incidencia" => $incidencia, 'empleados' => $empleados]);
     }
 
     public function editarIncidencia(Request $request, $id_incidencia){
@@ -52,16 +59,15 @@ class IncidenciaController extends Controller
             'apellido_contacto' => 'required',
             'descripcion' => 'required',
             'nif_cif' => 'required',
-            'telefono_contacto' => 'required|regex:/(01)[0-9]{9}/',
+            'telefono_contacto' => 'required|regex:/[0-9]{9}/',
             'cp' => 'required|max:5',
             'email_contacto' => 'required|email',
         ]);
         $incidencia = Incidencia::find($id_incidencia);
         $incidencia->fill($request->all());
         $incidencia->save();
-        $incidencias=Incidencia::where('id_cliente', 1)->get();
-        $isAdmin = false; 
-        return view('listaIncidencias',compact('incidencias', 'isAdmin'));
+        var_dump("!!!!!");
+        return redirect()->route('incidencias');
     }
 
     public function asignarIncidencia(Request $request){
