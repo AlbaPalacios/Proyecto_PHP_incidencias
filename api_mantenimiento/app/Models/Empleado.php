@@ -16,15 +16,15 @@ class Empleado extends Model
 
    
     public function incidenciasCreadas(){
-        return $this->hasMany(App\Models\Incidencia::class, 'id_empleado', 'id_empleado');
+        return $this->hasMany(Incidencia::class, 'id_empleado', 'id_empleado');
     }
 
     public function incidenciasAsignadas(){
-        return $this->hasMany(App\Models\Incidencia::class, 'id_empleado_asignado', 'id_empleado');
+        return $this->hasMany(Incidencia::class, 'id_empleado_asignado', 'id_empleado');
     }
     
     public function clientesRegistrados(){
-        return $this->hasMany(App\Models\Cliente::class, 'id_empleado_creador', 'id_empleado');
+        return $this->hasMany(Incidencia::class, 'id_empleado_creador', 'id_empleado');
     }
 
     //Enlaza empleado con la tabla User de laravel

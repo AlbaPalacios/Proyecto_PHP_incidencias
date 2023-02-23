@@ -66,7 +66,6 @@ class IncidenciaController extends Controller
         $incidencia = Incidencia::find($id_incidencia);
         $incidencia->fill($request->all());
         $incidencia->save();
-        var_dump("!!!!!");
         return redirect()->route('incidencias');
     }
 
