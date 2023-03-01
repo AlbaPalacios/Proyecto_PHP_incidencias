@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Empleado;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
@@ -21,8 +22,15 @@ class IncidenciaController extends Controller
             $incidencias=Incidencia::all();
         }
         else {
-            $empleado = Empleado::where('id_user', Auth::user()->id)->first();
-            $incidencias=Incidencia::where('id_empleado_asignado', $empleado->id_empleado)->get();
+            if (Auth::user()->esEmpleado == '1') {
+                $empleado = Empleado::where('id_user', Auth::user()->id)->first();
+                $incidencias=Incidencia::where('id_empleado_asignado', $empleado->id_empleado)->get();
+            } else if (Auth::user() -> esCliente == '1') {
+                $cliente = Cliente::where('id_user', Auth::user()->id)->first();
+                $incidencias=Incidencia::where('id_cliente', $cliente->id_cliente)->get();
+            } else {
+                $incidencias = array();
+            }
         }
         return view('listaIncidencias',['incidencias' => $incidencias]);
     }
@@ -63,6 +71,18 @@ class IncidenciaController extends Controller
             'cp' => 'required|max:5',
             'email_contacto' => 'required|email',
         ]);
+        $incidencia = Incidencia::find($id_incidencia);
+        $incidencia->fill($request->all());
+        $incidencia->save();
+        return redirect()->route('incidencias');
+    }
+
+    public function mostrarFormularioCambiarEstadoIncidencia(Request $request, $id_incidencia){
+        $incidencia = Incidencia::find($id_incidencia);
+        return view('cambiarEstadoIncidencia',["incidencia" => $incidencia]);
+    }
+
+    public function cambiarEstadoIncidencia(Request $request, $id_incidencia){
         $incidencia = Incidencia::find($id_incidencia);
         $incidencia->fill($request->all());
         $incidencia->save();

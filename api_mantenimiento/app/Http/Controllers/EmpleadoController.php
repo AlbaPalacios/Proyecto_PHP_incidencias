@@ -27,6 +27,7 @@ class EmpleadoController extends Controller
             'name' => $request->nombre,
             'email' => $request->correo,
             'password' => Hash::make("password"),
+            'esEMpleado' => 1
         ]);
         $usuarioEmpleado->isAdmin = $request->tipo;
         $usuarioEmpleado->save();

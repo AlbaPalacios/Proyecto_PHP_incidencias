@@ -27,6 +27,7 @@ class ClienteController extends Controller
             'name' => $request->nombre,
             'email' => $request->correo,
             'password' => Hash::make("password"),
+            'esCliente' => 1
         ]);
         $usuarioCliente->isAdmin = 0;
         $usuarioCliente->save();

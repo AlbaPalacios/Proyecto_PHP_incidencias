@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <h1>Lista de tareas</h1>
+  <h1>Lista de incidencias</h1>
   <div class="container">
     @if (Auth::user()->isAdmin == '1')  
     <button
@@ -23,8 +23,8 @@
         <th scope="col">Descripcion</th>
         <th scope="col">Estado</th>
         <th scope="col">Fecha Realizacion</th>
-        <th scope="col">ID operario</th>
-        <th scope="col">Acciones</th>
+        <th scope="col">Operario</th>
+        @if (Auth::user()->esCliente != '1')<th scope="col">Acciones</th>@endif
       </tr>
     </thead>
     <tbody>
@@ -46,7 +46,7 @@
         @endif
 
         <td>{{$incidencia->fecha_realizacion}}</td>
-        <td>{{$incidencia->id_operario}}</td>
+        <td>@if ($incidencia->empleadoAsignado != null){{$incidencia->empleadoAsignado->nombre}}@else{{''}}@endif</td>
         <td>
           @if (Auth::user()->isAdmin == '1')
          
@@ -55,12 +55,12 @@
             href="/incidencias/editar/{{$incidencia->id_incidencia}}"
             class="btn btn-info">Editar
             </a>{{' '}} @endif
-
+            @if (Auth::user()->esEmpleado == '1')
           <a
             type="button"
-            href="/mostrarTarea/{{$incidencia->id_incidencia}}"
-            class="btn btn-warning">Mostrar</a
-          >{{' '}} 
+            href="/incidencias/cambiarEstado/{{$incidencia->id_incidencia}}"
+            class="btn btn-warning">Cambiar estado</a
+          >@endif{{' '}} 
           @if (Auth::user()->isAdmin == '1')
           <form action="/borrarTarea/{{$incidencia->id_incidencia}}" method="POST">
             <button

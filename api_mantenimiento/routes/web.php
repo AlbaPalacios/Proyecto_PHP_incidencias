@@ -17,16 +17,17 @@ use App\Http\Controllers\PDFController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
+Route::group(['prefix' => ''], function() {
+    Route::get('/', [IncidenciaController::class, 'mostrarIncidencias'])->name('incidencias');
+});
 
 Route::group(['prefix' => 'incidencias'], function() {
     Route::get('/registrar', [IncidenciaController::class, 'mostrarFormularioRegistrarIncidencia'])->name('incidencias.registrar.get');
     Route::post('/registrar', [IncidenciaController::class, 'registrarIncidencia'])->name('incidencias.registrar.post');
     Route::get('/editar/{id_incidencia}', [IncidenciaController::class, 'mostrarFormularioEditarIncidencia'])->name('incidencias.editar.get');
     Route::post('/editar/{id_incidencia}', [IncidenciaController::class, 'editarIncidencia'])->name('incidencias.editar.post');
+    Route::get('/cambiarEstado/{id_incidencia}', [IncidenciaController::class, 'mostrarFormularioCambiarEstadoIncidencia'])->name('incidencias.cambiarEstado.get');
+    Route::post('/cambiarEstado/{id_incidencia}', [IncidenciaController::class, 'cambiarEstadoIncidencia'])->name('incidencias.cambiarEstado.post');
     Route::get('/', [IncidenciaController::class, 'mostrarIncidencias'])->name('incidencias');
 });
 

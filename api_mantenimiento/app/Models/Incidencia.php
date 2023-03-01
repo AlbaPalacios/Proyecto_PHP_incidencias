@@ -17,4 +17,9 @@ class Incidencia extends Model
     public function obtenerIncidencias(){
         return Incidencia::all();
     }
+
+    //Enlaza empleado con la tabla User de laravel
+    public function empleadoAsignado() {
+        return $this->belongsTo(Empleado::class, 'id_empleado_asignado', 'id_empleado');
+    }
 }
