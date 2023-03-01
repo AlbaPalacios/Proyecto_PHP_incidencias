@@ -28,6 +28,7 @@ Route::group(['prefix' => 'incidencias'], function() {
     Route::post('/editar/{id_incidencia}', [IncidenciaController::class, 'editarIncidencia'])->name('incidencias.editar.post');
     Route::get('/cambiarEstado/{id_incidencia}', [IncidenciaController::class, 'mostrarFormularioCambiarEstadoIncidencia'])->name('incidencias.cambiarEstado.get');
     Route::post('/cambiarEstado/{id_incidencia}', [IncidenciaController::class, 'cambiarEstadoIncidencia'])->name('incidencias.cambiarEstado.post');
+    Route::post('/borrar/{id_incidencia}', [IncidenciaController::class, 'borrarIncidencia'])->name('incidencias.borrar.post');
     Route::get('/', [IncidenciaController::class, 'mostrarIncidencias'])->name('incidencias');
 });
 
@@ -57,6 +58,7 @@ Route::group(['prefix' => 'cuotas'], function() {
     Route::get('/remesaMensual',[CuotaController::class, 'mostrarRemesaMensual'])->name('cuotas.remesa.crearRemesaMensual.get');
     Route::post('/remesaMensual',[CuotaController::class, 'crearRemesaMensual'])->name('cuotas.remesa.crearRemesaMensual.post');
     Route::get('/pdf/{id_cuota}',[PDFController::class, 'crearPDFCuota'])->name('cuotas.pdf');
+    Route::post('/borrar/{id_cuota}',[CuotaController::class, 'borrarCuota'])->name('cuotas.borrar.post');
     Route::get('/',[CuotaController::class, 'mostrarListaCuotas'])->name('cuotas');
 });
 

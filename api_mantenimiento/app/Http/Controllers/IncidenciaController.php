@@ -51,6 +51,10 @@ class IncidenciaController extends Controller
         $incidencia = new Incidencia();
         //Metodo fill rellena el objeto incidencia
         $incidencia->fill($request->all());
+        if (Auth::user()->esCliente != null && Auth::user()->esCliente == '1') {
+            $cliente = Cliente::where('id_user', Auth::user()->id)->first();
+            $incidencia->id_cliente = $cliente->id_cliente;
+        }
         $incidencia->save();
         return redirect()->route('incidencias');
     }
@@ -86,6 +90,12 @@ class IncidenciaController extends Controller
         $incidencia = Incidencia::find($id_incidencia);
         $incidencia->fill($request->all());
         $incidencia->save();
+        return redirect()->route('incidencias');
+    }
+
+    public function borrarIncidencia(Request $request, $id_incidencia){
+        $incidencia = Incidencia::find($id_incidencia);
+        $incidencia->delete();
         return redirect()->route('incidencias');
     }
 

@@ -72,5 +72,11 @@ class CuotaController extends Controller
         }
         return redirect()->route('cuotas');
     }
+
+    public function borrarCuota(Request $request, $id_cuota){
+        $cuota = Cuota::find($id_cuota);
+        $cuota->delete();
+        return redirect()->route('cuotas');
+    }
     
 }

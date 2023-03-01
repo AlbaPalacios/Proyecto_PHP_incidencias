@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<script type="text/javascript">
+  function borrarCuota() {
+    return confirm('Estas seguro?');
+  }
+</script>
 <div class="container">
   <h1>Lista de cuotas</h1>
   <div class="container">
@@ -56,7 +61,12 @@
             type="button"
             href="{{route('cuotas.pdf', ['id_cuota' => $cuota->id_cuota])}}"
             class="btn btn-info">PDF
-            </a></td>
+            </a><form onsubmit="return borrarCuota()" action="/cuotas/borrar/{{$cuota->id_cuota}}" method="POST">
+              @csrf <!-- {{ csrf_field() }} -->
+              <button
+              type="submit"
+              class="btn btn-danger">Borrar</button>
+            </form></td>
       </tr>
       @endforeach
     </tbody>

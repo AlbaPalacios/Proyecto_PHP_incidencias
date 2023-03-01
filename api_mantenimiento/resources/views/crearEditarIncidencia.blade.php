@@ -13,7 +13,7 @@
         <!-- DNI/CIF -->
         <div class="mb-3">
             <label class="form-label" for="nif_cif">DNI o CIF</label>
-            <input @if (Auth::user() !== null && Auth::user()->isAdmin != 1) {{'disabled'}} @endif type="text" value="@if (isset($incidencia->nif_cif) == false) {{old('nif_cif')}} @else {{$incidencia->nif_cif}} @endif"
+            <input type="text" value="@if (isset($incidencia->nif_cif) == false) {{old('nif_cif')}} @else {{$incidencia->nif_cif}} @endif"
                 class="form-control" id="nif_cif"
                 name="nif_cif" placeholder="DNI o CIF">
                 <div class="text-danger">
@@ -24,7 +24,7 @@
         <!-- Nombre contacto -->
         <div class="mb-3">
             <label class="form-label" for="nombre_contacto">Nombre de contacto</label>
-            <input @if (Auth::user() !== null && Auth::user()->isAdmin != 1) {{'disabled'}} @endif type="text" value="@if (isset($incidencia->nombre_contacto) == false) {{old('nombre_contacto')}} @else {{$incidencia->nombre_contacto}} @endif"
+            <input type="text" value="@if (isset($incidencia->nombre_contacto) == false) {{old('nombre_contacto')}} @else {{$incidencia->nombre_contacto}} @endif"
                 class="form-control"
                 name="nombre_contacto" id="nombre_contacto" placeholder="Persona de contacto">
                 <div class="text-danger">
@@ -35,7 +35,7 @@
         <!-- Apellido contacto -->
         <div class="mb-3">
             <label class="form-label" for="apellido_contacto">Apellidos del contacto</label>
-            <input @if (Auth::user() !== null && Auth::user()->isAdmin != 1) {{'disabled'}} @endif type="text" value="@if (isset($incidencia->apellido_contacto) == false) {{old('apellido_contacto')}} @else {{$incidencia->nombre_contacto}} @endif"
+            <input type="text" value="@if (isset($incidencia->apellido_contacto) == false) {{old('apellido_contacto')}} @else {{$incidencia->nombre_contacto}} @endif"
                 class="form-control"
                 name="apellido_contacto" id="apellido_contacto" placeholder="Persona de contacto">
                 <div class="text-danger">
@@ -46,7 +46,7 @@
         <!-- Telefono contacto -->
         <div class="mb-3">
             <label class="form-label" for="telefono_contacto">Telefono de contacto</label>
-            <input @if (Auth::user() !== null && Auth::user()->isAdmin != 1) {{'disabled'}} @endif type="text" value="@if (isset($incidencia->telefono_contacto) == false) {{old('telefono_contacto')}} @else {{$incidencia->telefono_contacto}} @endif"
+            <input type="text" value="@if (isset($incidencia->telefono_contacto) == false) {{old('telefono_contacto')}} @else {{$incidencia->telefono_contacto}} @endif"
                 class="form-control"
                 name="telefono_contacto" id="telefono_contacto" placeholder="Telefono de contacto">
                 <div class="text-danger">
@@ -57,7 +57,7 @@
         <!-- Descripcion -->
         <div class="mb-3">
             <label class="form-label" for="descripcion">Descripcion</label>
-            <input @if (Auth::user() !== null && Auth::user()->isAdmin != 1) {{'disabled'}} @endif type="text" value="@if (isset($incidencia->descripcion) == false) {{old('descripcion')}} @else {{$incidencia->descripcion}} @endif"
+            <input type="text" value="@if (isset($incidencia->descripcion) == false) {{old('descripcion')}} @else {{$incidencia->descripcion}} @endif"
                 class="form-control" name="descripcion"
                 id="descripcion" placeholder="Persona de Descripcion">
                 <div class="text-danger">
@@ -68,7 +68,7 @@
         <!-- Email -->
         <div class="mb-3">
             <label class="form-label" for="email_contacto">Correo electronico</label>
-            <input @if (Auth::user() !== null && Auth::user()->isAdmin != 1) {{'disabled'}} @endif type="text" value="@if (isset($incidencia->email_contacto) == false) {{old('email_contacto')}} @else {{$incidencia->email_contacto}} @endif"
+            <input type="text" value="@if (isset($incidencia->email_contacto) == false) {{old('email_contacto')}} @else {{$incidencia->email_contacto}} @endif"
                 class="form-control" name="email_contacto" id="email_contacto"
                 placeholder="Correo electronico">
                 <div class="text-danger">
@@ -79,21 +79,21 @@
         <!-- Direccion -->
         <div class="mb-3">
             <label class="form-label" for="direccion">Direccion</label>
-            <input @if (Auth::user() !== null && Auth::user()->isAdmin != 1) {{'disabled'}} @endif type="text" value="@if (isset($incidencia->direccion) == false) {{old('direccion')}} @else {{$incidencia->direccion}} @endif" class="form-control" name="direccion" id="direccion"
+            <input type="text" value="@if (isset($incidencia->direccion) == false) {{old('direccion')}} @else {{$incidencia->direccion}} @endif" class="form-control" name="direccion" id="direccion"
                 placeholder="Direccion">
         </div>
 
         <!-- Poblacion -->
         <div class="mb-3">
             <label class="form-label" for="poblacion">Poblacion</label>
-            <input @if (Auth::user() !== null && Auth::user()->isAdmin != 1) {{'disabled'}} @endif type="text" value="@if (isset($incidencia->poblacion) == false) {{old('poblacion')}} @else {{$incidencia->poblacion}} @endif" class="form-control" name="poblacion" id="poblacion"
+            <input type="text" value="@if (isset($incidencia->poblacion) == false) {{old('poblacion')}} @else {{$incidencia->poblacion}} @endif" class="form-control" name="poblacion" id="poblacion"
                 placeholder="Poblacion">
         </div>
 
         <!-- Codigo postal -->
         <div class="mb-3">
             <label class="form-label" for="cp">Codigo postal</label>
-            <input @if (Auth::user() !== null && Auth::user()->isAdmin != 1) {{'disabled'}} @endif type="text" value="@if (isset($incidencia->cp) == false) {{old('cp')}} @else {{$incidencia->cp}} @endif" class="form-control" name="cp" id="cp"
+            <input type="text" value="@if (isset($incidencia->cp) == false) {{old('cp')}} @else {{$incidencia->cp}} @endif" class="form-control" name="cp" id="cp"
                 placeholder="Codigo postal">
                 <div class="text-danger">
                     {{$errors->first('cp')}}
@@ -103,11 +103,12 @@
         <!-- Provincia -->
         <div class="mb-3">
             <label class="form-label" for="provincia">Provincia</label>
-            <input @if (Auth::user() !== null && Auth::user()->isAdmin != 1) {{'disabled'}} @endif type="text" value="@if (isset($incidencia->provincia) == false) {{old('provincia')}} @else {{$incidencia->provincia}} @endif" class="form-control" name="provincia" id="provincia"
+            <input type="text" value="@if (isset($incidencia->provincia) == false) {{old('provincia')}} @else {{$incidencia->provincia}} @endif" class="form-control" name="provincia" id="provincia"
                 placeholder="Provincia">
         </div>
 
         <!-- Estado -->
+        @if (Auth::user() !== null && Auth::user()->esCliente == '0')
         <div class="mb-3">
             <label class="form-label" for="estado">Estado</label>
             <select id="estado" name="estado" class="custom-select custom-select-lg mb-3">
@@ -117,6 +118,7 @@
                 <option @if (isset($incidencia->nif_cif) == true && $incidencia->estado == 'C') {{'selected'}} @endif value="C">Cancelada</option>
               </select>
         </div>
+        @endif
 
         <!-- Empleado asignado -->
         @if (Auth::user() !== null && Auth::user()->isAdmin == 1)
@@ -133,25 +135,31 @@
         
 
         <!-- Fecha realizacion -->
+        @if (Auth::user() !== null && Auth::user()->esCliente == '0')
         <div class="mb-3">
             <label class="form-label" for="fecha_realizacion">Fecha realizacion</label>
             <input type="text" value="@if (isset($incidencia->fecha_realizacion) == false) {{old('fecha_realizacion')}} @else {{$incidencia->fecha_realizacion}} @endif" class="form-control" name="fecha_realizacion"
                 id="fecha_realizacion" placeholder="Fecha realizacion">
         </div>
+        @endif
 
         <!-- Anotacion anterior -->
+        @if (Auth::user() !== null && Auth::user()->esCliente == '0')
         <div class="mb-3">
             <label class="form-label" for="anotacion_anterior">Anotaciones anteriores</label>
             <input type="text" value="@if (isset($incidencia->anotacion_anterior) == false) {{old('anotacion_anterior')}} @else {{$incidencia->anotacion_anterior}} @endif" class="form-control"
                 name="anotacion_anterior" id="anotacion_anterior" placeholder="Anotaciones anteriores">
         </div>
+        @endif
 
         <!-- Anotacion Posterior -->
+        @if (Auth::user() !== null && Auth::user()->esCliente == '0')
         <div class="mb-3">
             <label class="form-label" for="anotacion_posterior">Anotaciones posteriores</label>
             <input type="text" value="@if (isset($incidencia->anotacion_posterior) == false) {{old('anotacion_posterior')}} @else {{$incidencia->anotacion_posterior}} @endif" class="form-control"
                 name="anotacion_posterior" id="anotacion_posterior" placeholder="Anotaciones posteriores">
         </div>
+        @endif
 
         <a type="button" href="/incidencias" class="btn btn-primary">Atras</a>
         <button type="submit" class="btn btn-primary">@if (isset($incidencia) == false) {{'Crear'}}  @else {{'Editar'}} @endif incidencia</button>

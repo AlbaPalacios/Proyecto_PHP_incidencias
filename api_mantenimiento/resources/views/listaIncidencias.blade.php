@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+<script type="text/javascript">
+  function borrarIncidencia() {
+    return confirm('Estas seguro?');
+  }
+</script>
 <div class="container">
   <h1>Lista de incidencias</h1>
   <div class="container">
-    @if (Auth::user()->isAdmin == '1')  
+    @if (Auth::user()->isAdmin == '1' || Auth::user()->esCliente == '1')
     <button
       type="button"
       class="btn btn-primary"
@@ -62,10 +67,10 @@
             class="btn btn-warning">Cambiar estado</a
           >@endif{{' '}} 
           @if (Auth::user()->isAdmin == '1')
-          <form action="/borrarTarea/{{$incidencia->id_incidencia}}" method="POST">
+          <form onsubmit="return borrarIncidencia()" action="/incidencias/borrar/{{$incidencia->id_incidencia}}" method="POST">
+            @csrf <!-- {{ csrf_field() }} -->
             <button
             type="submit"
-            href="/borrarTarea/{{$incidencia->id_incidencia}}"
             class="btn btn-danger">Borrar</button>
           </form>
           @endif
