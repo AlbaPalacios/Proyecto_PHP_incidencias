@@ -15,9 +15,11 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
+        // Comprueba si es administrador, si lo es, deja pasar la peticion
         if (auth()->check() && auth()->user()->isAdmin)
             return $next($request);
 
+            //Si no, redirige a la apgina principal
         return redirect('/');
     }
 }
