@@ -16,7 +16,7 @@ class Empleado extends Model
 
    
     public function incidenciasCreadas(){
-        return $this->hasMany(Incidencia::class, 'id_empleado', 'id_empleado');
+        return $this->hasMany(Incidencia::class, 'id_empleado', 'id_empleado');//realacion de 1-n
     }
 
     public function incidenciasAsignadas(){
@@ -29,7 +29,7 @@ class Empleado extends Model
 
     //Enlaza empleado con la tabla User de laravel
     public function usuarioEmpleado() {
-        return $this->belongsTo(User::class, 'id_user', 'id');
+        return $this->belongsTo(User::class, 'id_user', 'id');//relacion 1-1
     }
 
     public function obtenerEmpleados(){

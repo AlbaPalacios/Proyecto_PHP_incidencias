@@ -8,6 +8,7 @@
 </script>
 <div class="container">
   <h1>Lista de cuotas</h1>
+  {{-- muestra este boton si solo es admin --}}
   <div class="container">
     @if (Auth::user() !== null && Auth::user()->isAdmin)  
     <button
@@ -18,7 +19,7 @@
       Añadir remesa mensual
     </button>
     @endif
-
+      {{-- muestra este boton si solo es admin --}}
     @if (Auth::user() !== null && Auth::user()->isAdmin)  
     <button
       type="button"

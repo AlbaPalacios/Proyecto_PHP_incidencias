@@ -13,7 +13,7 @@ class AdminMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next)//encargado de decidir el paso a las rutas
     {
         // Comprueba si es administrador, si lo es, deja pasar la peticion
         if (auth()->check() && auth()->user()->isAdmin)

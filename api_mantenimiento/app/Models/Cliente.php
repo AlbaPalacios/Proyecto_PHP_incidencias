@@ -14,11 +14,11 @@ class Cliente extends Model
     protected $fillable = ['id_cliente', 'dni', 'nombre', 'telefono','correo','numero_cuenta','pais','moneda','importe_cuota_mensual'];
 
     public function incidenciasRegistradas() {
-        return $this->hasMany(App\Models\Incidencia::class, 'id_cliente', 'id_cliente');
+        return $this->hasMany(App\Models\Incidencia::class, 'id_cliente', 'id_cliente');//1-n
     }
 
     public function cuotas() {
-        return $this->hasMany(App\Models\Cuota::class, 'cliente_id', 'id_cliente');
+        return $this->hasMany(App\Models\Cuota::class, 'cliente_id', 'id_cliente');//1-n
     }
 
     public function obtenerClientes(){
@@ -35,7 +35,7 @@ class Cliente extends Model
 
     //Enlaza cliente con la tabla User de laravel
     public function usuarioCliente() {
-        return $this->belongsTo(User::class, 'id_user', 'id');
+        return $this->belongsTo(User::class, 'id_user', 'id');//1-1
     }
    
 }

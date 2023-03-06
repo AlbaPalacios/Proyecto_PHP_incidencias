@@ -14,12 +14,14 @@ class IncidenciaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+
+      
     }
 
     public function mostrarIncidencias(Request $request){
         if(Auth::user()->isAdmin == '1') {
             $incidencias=Incidencia::all();
+            
         }
         else {
             if (Auth::user()->esEmpleado == '1') {

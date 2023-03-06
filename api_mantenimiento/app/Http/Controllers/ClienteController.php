@@ -11,7 +11,7 @@ class ClienteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+     
     }
 
     public function mostrarListaClientes(Request $request){
@@ -19,19 +19,10 @@ class ClienteController extends Controller
         return view('clientes.listaClientes',["clientes" => $clientes]);
     }
     
-    public function mostrarRegistrarCliente(Request $request){
+    public function mostrarRegistrarCliente(Request $request){//vista
         return view('crearEditarCliente',[]);
     }
-    public function registrarCliente(Request $request){
-        $usuarioCliente = User::create([
-            'name' => $request->nombre,
-            'email' => $request->correo,
-            'password' => Hash::make("password"),
-            'esCliente' => 1
-        ]);
-        $usuarioCliente->isAdmin = 0;
-        $usuarioCliente->save();
-
+    public function registrarCliente(Request $request){//envio datos
         $request->validate([
             'dni' => 'required',
             'nombre' => 'required',
@@ -41,6 +32,16 @@ class ClienteController extends Controller
             'moneda' => 'required',
             'importe_cuota_mensual' => 'required',
         ]);
+
+        $usuarioCliente = User::create([
+            'name' => $request->nombre,
+            'email' => $request->correo,
+            'password' => Hash::make("password"),//contraseña por defecto
+        ]);
+        $usuarioCliente->esCliente = 1;
+        $usuarioCliente->save();
+
+        
 
         $cliente = new Cliente();
         $cliente->fill($request->all());

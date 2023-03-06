@@ -11,7 +11,7 @@ class EmpleadoController extends Controller
 {   
     public function __construct()
     {
-        $this->middleware('auth');
+      
     }
 
     public function mostrarListaEmpleados(Request $request){
@@ -23,12 +23,16 @@ class EmpleadoController extends Controller
         return view('crearEditarEmpleado',[]);
     }
     public function registrarEmpleado(Request $request){
+        //crear usuario nuevo
         $usuarioEmpleado = User::create([
             'name' => $request->nombre,
             'email' => $request->correo,
             'password' => Hash::make("password"),
-            'esEMpleado' => 1
         ]);
+        //el modelo user de laravel ui no deja introducir al metodo 
+        //create nuevos campos y por esto lo tengo que guardar fuera de este
+        
+        $usuarioEmpleado->esEmpleado = 1;
         $usuarioEmpleado->isAdmin = $request->tipo;
         $usuarioEmpleado->save();
 

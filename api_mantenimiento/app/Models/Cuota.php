@@ -23,6 +23,6 @@ class Cuota extends Model
 
     //Enlaza empleado con la tabla User de laravel
     public function clienteCuota() {
-        return $this->belongsTo(Cliente::class, 'cliente_id', 'id_cliente');
+        return $this->belongsTo(Cliente::class, 'cliente_id', 'id_cliente');//1-1
     }
 }
