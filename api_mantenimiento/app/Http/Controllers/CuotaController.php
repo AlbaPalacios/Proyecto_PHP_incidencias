@@ -37,6 +37,9 @@ class CuotaController extends Controller
         $cuota = new Cuota();
         $cuota->fill($request->all());
         $cuota->save();
+        $ultima_cuota = Cuota::orderBy('id_cuota', 'desc')->first();
+        $cliente = Cliente::find($request->cliente_id);
+        $this->mandarCorreoCuota($cliente->correo, $ultima_cuota);
         return redirect()->route('cuotas');
     }
 
@@ -84,14 +87,14 @@ class CuotaController extends Controller
         return Mail::to($email)->send(new FacturaMail());
     }
 
-    private function guardarPDFCuota($id_cuota) {
+    /* private function guardarPDFCuota($id_cuota) {
         $cuota = Cuota::find($id_cuota);
         // share data to view
         view()->share('cuotas.informacionCuota',["cuota" => $cuota]);
         $pdf = PDF::loadView('cuotas.informacionCuota', ["cuota" => $cuota]);
         $content = $pdf->download()->getOriginalContent();
         Storage::put('public/'.$id_cuota.'.pdf',$content) ;
-    }
+    } */
 
     public function borrarCuota(Request $request, $id_cuota){//boton
         $cuota = Cuota::find($id_cuota);
