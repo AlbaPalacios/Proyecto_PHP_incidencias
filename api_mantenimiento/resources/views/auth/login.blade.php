@@ -47,9 +47,23 @@
                                     <label class="form-check-label" for="remember">
                                         {{ __('Recordar') }}
                                     </label>
+                                    
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <a class="navbar-brand" href="{{ url('/user/password/reset') }}">
+                                        {{ __('Resetear contraseña') }}
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">

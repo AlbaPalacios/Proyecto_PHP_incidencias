@@ -6,6 +6,7 @@ use App\Http\Controllers\IncidenciaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,10 @@ Route::group(['prefix' => 'cuotas'], function() {
 
 Route::group(['prefix' => 'facturas'], function() {
     Route::get('/', 'CuotaController@listadoCuotas')->name('facturas')->middleware(['auth', 'admin']);
+});
+
+Route::group(['prefix' => 'user'], function() {
+    Route::post('/password/reset', [UserController::class, 'resetearContraseña'])->name('user.password.reset');
 });
 
 Auth::routes();
