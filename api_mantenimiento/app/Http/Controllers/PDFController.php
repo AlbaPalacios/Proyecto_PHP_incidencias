@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cuota;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PDFController extends Controller
 {

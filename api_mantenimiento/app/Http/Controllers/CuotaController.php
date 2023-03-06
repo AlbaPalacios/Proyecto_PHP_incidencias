@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\FacturaMail;
 use App\Models\Cliente;
 use App\Models\Cuota;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class CuotaController extends Controller
 {
@@ -69,8 +73,24 @@ class CuotaController extends Controller
             $cuota->fill($request->all());
             $cuota->cliente_id = $cliente->id_cliente;
             $cuota->save();
+            $ultima_cuota = Cuota::orderBy('id_cuota', 'desc')->first();
+            $this->mandarCorreoCuota($cliente->correo, $ultima_cuota);
+            //$this->guardarPDFCuota($ultima_cuota->id_cuota);
         }
         return redirect()->route('cuotas');
+    }
+
+    private function mandarCorreoCuota($email, $cuota) {
+        return Mail::to($email)->send(new FacturaMail());
+    }
+
+    private function guardarPDFCuota($id_cuota) {
+        $cuota = Cuota::find($id_cuota);
+        // share data to view
+        view()->share('cuotas.informacionCuota',["cuota" => $cuota]);
+        $pdf = PDF::loadView('cuotas.informacionCuota', ["cuota" => $cuota]);
+        $content = $pdf->download()->getOriginalContent();
+        Storage::put('public/'.$id_cuota.'.pdf',$content) ;
     }
 
     public function borrarCuota(Request $request, $id_cuota){//boton
